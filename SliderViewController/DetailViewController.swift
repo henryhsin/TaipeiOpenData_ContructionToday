@@ -7,11 +7,11 @@
 //
 
 import UIKit
+var item: itemModel?
 
 class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
     
     var detailDict = [String: String]()
-    var dataTaskArr = [NSURLSessionDownloadTask]()
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -19,7 +19,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
     
-    var item: itemModel?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

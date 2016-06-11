@@ -17,6 +17,10 @@
 		82A6E9C21D094583004B5CDE /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6E9C11D094583004B5CDE /* LeftViewController.swift */; };
 		82A6EAC01D0A5DB9004B5CDE /* HeaderFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82A6EABF1D0A5DB9004B5CDE /* HeaderFooterView.xib */; };
 		82A6EAC21D0A7389004B5CDE /* HeaderFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6EAC11D0A7389004B5CDE /* HeaderFooterViewController.swift */; };
+		82CFD4851D0B969F00AC5657 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CFD4841D0B969F00AC5657 /* MapViewController.swift */; };
+		82CFD4871D0B9CD900AC5657 /* ExSlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CFD4861D0B9CD900AC5657 /* ExSlideMenuController.swift */; };
+		82CFD48B1D0BABF400AC5657 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CFD48A1D0BABF400AC5657 /* UIApplication.swift */; };
+		82CFD48D1D0BAE5100AC5657 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82CFD48C1D0BAE5100AC5657 /* UIViewController.swift */; };
 		82D380281D0AC3FF00509C5D /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D380271D0AC3FF00509C5D /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +37,10 @@
 		82A6E9C11D094583004B5CDE /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		82A6EABF1D0A5DB9004B5CDE /* HeaderFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderFooterView.xib; sourceTree = "<group>"; };
 		82A6EAC11D0A7389004B5CDE /* HeaderFooterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderFooterViewController.swift; sourceTree = "<group>"; };
+		82CFD4841D0B969F00AC5657 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		82CFD4861D0B9CD900AC5657 /* ExSlideMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExSlideMenuController.swift; sourceTree = "<group>"; };
+		82CFD48A1D0BABF400AC5657 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		82CFD48C1D0BAE5100AC5657 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		82D380271D0AC3FF00509C5D /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,11 +75,13 @@
 			isa = PBXGroup;
 			children = (
 				82A6EABD1D0A51A8004B5CDE /* Supports */,
+				82CFD48E1D0BB60900AC5657 /* Extension */,
 				82A6EABE1D0A51D4004B5CDE /* View */,
-				82A6E9AB1D0940A0004B5CDE /* AppDelegate.swift */,
+				82CFD4841D0B969F00AC5657 /* MapViewController.swift */,
 				82D380271D0AC3FF00509C5D /* DetailViewController.swift */,
 				82A6E9BF1D09456B004B5CDE /* MainViewController.swift */,
 				82A6E9C11D094583004B5CDE /* LeftViewController.swift */,
+				82CFD4861D0B9CD900AC5657 /* ExSlideMenuController.swift */,
 				82A6E9B71D0940A0004B5CDE /* Info.plist */,
 			);
 			path = SliderViewController;
@@ -80,6 +90,7 @@
 		82A6EABD1D0A51A8004B5CDE /* Supports */ = {
 			isa = PBXGroup;
 			children = (
+				82A6E9AB1D0940A0004B5CDE /* AppDelegate.swift */,
 				82A6E9BD1D0941B2004B5CDE /* SlideMenuController.swift */,
 				82A6E9AD1D0940A0004B5CDE /* ViewController.swift */,
 				82A6E9B21D0940A0004B5CDE /* Assets.xcassets */,
@@ -96,6 +107,15 @@
 				82A6EAC11D0A7389004B5CDE /* HeaderFooterViewController.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		82CFD48E1D0BB60900AC5657 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				82CFD48C1D0BAE5100AC5657 /* UIViewController.swift */,
+				82CFD48A1D0BABF400AC5657 /* UIApplication.swift */,
+			);
+			name = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,10 +193,14 @@
 				82A6E9AE1D0940A0004B5CDE /* ViewController.swift in Sources */,
 				82A6E9BE1D0941B2004B5CDE /* SlideMenuController.swift in Sources */,
 				82A6EAC21D0A7389004B5CDE /* HeaderFooterViewController.swift in Sources */,
+				82CFD48D1D0BAE5100AC5657 /* UIViewController.swift in Sources */,
 				82A6E9AC1D0940A0004B5CDE /* AppDelegate.swift in Sources */,
 				82A6E9C21D094583004B5CDE /* LeftViewController.swift in Sources */,
 				82A6E9C01D09456B004B5CDE /* MainViewController.swift in Sources */,
 				82D380281D0AC3FF00509C5D /* DetailViewController.swift in Sources */,
+				82CFD4851D0B969F00AC5657 /* MapViewController.swift in Sources */,
+				82CFD48B1D0BABF400AC5657 /* UIApplication.swift in Sources */,
+				82CFD4871D0B9CD900AC5657 /* ExSlideMenuController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

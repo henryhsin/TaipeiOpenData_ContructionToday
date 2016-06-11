@@ -10,7 +10,7 @@ import UIKit
 
 var dataArray = [AnyObject]()
 
-class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
+class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSURLSessionDelegate, NSURLSessionDownloadDelegate, SlideMenuControllerDelegate {
 
     @IBAction func leftButton(sender: UIBarButtonItem) {
     self.slideMenuController()?.openLeft()
@@ -34,6 +34,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let dataTask = session.downloadTaskWithURL(url!)
         dataTask.resume()
+        
+        setNavigationBarItem()
 
     }
     
@@ -42,7 +44,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Dispose of any resources that can be recreated.
     }
     
-    
+    override func setNavigationBarItem(){
+        self.addLeftBarButtonWithImage(UIImage(named: "ic_menu_black_24dp")!)
+    }
     // MARK: - UITableView
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -83,8 +87,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             try dataArray = NSJSONSerialization.JSONObjectWithData(NSData(contentsOfURL: location)!, options: NSJSONReadingOptions.MutableContainers) as! [AnyObject]
             //NSJSONReadingOptions.MutableContainers指名會有很多資料
             self.tableView.reloadData()//再讓tableView重新reload data
-            
-            
         }catch {//有錯誤走這邊
             print("error!!")
         }
@@ -107,8 +109,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 
                 controller.detailDict = dataArray[indexPath.row] as! [String : String]
                 
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-                controller.navigationItem.leftItemsSupplementBackButton = true
+                
             }
         }
     }

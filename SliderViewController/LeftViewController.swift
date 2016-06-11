@@ -10,10 +10,7 @@ import UIKit
 
 enum LeftMenu: Int {
     case main = 0
-    case a
-    case b
-    case c
-    case d
+    case map
 }
 
 
@@ -21,12 +18,21 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     @IBOutlet weak var tableView: UITableView!
     
-    let data = ["main", "a", "b", "c", "d"]
-        
+    let data = ["main", "map"]
+    var mainViewController: UIViewController!
+    var mapViewController: UIViewController!
+    var menus = ["main", "map"]
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.separatorColor = UIColor.blackColor()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let mapViewController = storyboard.instantiateViewControllerWithIdentifier("map") as! MapViewController
+        self.mapViewController = UINavigationController(rootViewController: mapViewController)
     }
     
     override func didReceiveMemoryWarning() {
@@ -53,15 +59,9 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.05
+        return 0.1
     }
     
-//    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        
-//        return "First section header title"
-//        
-//        
-//    }
 
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRectMake(0, 0, tableView.bounds.size.width, 70))
@@ -78,14 +78,28 @@ class LeftViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return 200.0
     }
     
+    func changeViewController(menu: LeftMenu) {
+        switch menu {
+        case .main:
+            self.slideMenuController()?.changeMainViewController(self.mainViewController, close: true)
+        case .map:
+            self.slideMenuController()?.changeMainViewController(self.mapViewController, close: true)
+        
+        }
+    }
     
-    
-    
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        <#code#>
-//    }
-    
-    //func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    
-    //}
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let menu = LeftMenu(rawValue: indexPath.item) {
+            self.changeViewController(menu)
+        }
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+
 }
+
+    
+    
+
