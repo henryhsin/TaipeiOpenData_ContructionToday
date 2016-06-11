@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		82975AA71D0C5EFB005E6EFE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82975AA61D0C5EFB005E6EFE /* MapKit.framework */; };
+		82975AA91D0C7430005E6EFE /* MyAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82975AA81D0C7430005E6EFE /* MyAnnotation.swift */; };
+		82975AAB1D0C934E005E6EFE /* transFerFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82975AAA1D0C934E005E6EFE /* transFerFunc.swift */; };
 		82A6E9AC1D0940A0004B5CDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6E9AB1D0940A0004B5CDE /* AppDelegate.swift */; };
 		82A6E9AE1D0940A0004B5CDE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6E9AD1D0940A0004B5CDE /* ViewController.swift */; };
 		82A6E9B11D0940A0004B5CDE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82A6E9AF1D0940A0004B5CDE /* Main.storyboard */; };
@@ -25,6 +28,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		82975AA61D0C5EFB005E6EFE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		82975AA81D0C7430005E6EFE /* MyAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAnnotation.swift; sourceTree = "<group>"; };
+		82975AAA1D0C934E005E6EFE /* transFerFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = transFerFunc.swift; sourceTree = "<group>"; };
 		82A6E9A81D0940A0004B5CDE /* SliderViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SliderViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A6E9AB1D0940A0004B5CDE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82A6E9AD1D0940A0004B5CDE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82975AA71D0C5EFB005E6EFE /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +65,7 @@
 		82A6E99F1D0940A0004B5CDE = {
 			isa = PBXGroup;
 			children = (
+				82975AA61D0C5EFB005E6EFE /* MapKit.framework */,
 				82A6E9AA1D0940A0004B5CDE /* SliderViewController */,
 				82A6E9A91D0940A0004B5CDE /* Products */,
 			);
@@ -78,6 +86,7 @@
 				82CFD48E1D0BB60900AC5657 /* Extension */,
 				82A6EABE1D0A51D4004B5CDE /* View */,
 				82CFD4841D0B969F00AC5657 /* MapViewController.swift */,
+				82975AA81D0C7430005E6EFE /* MyAnnotation.swift */,
 				82D380271D0AC3FF00509C5D /* DetailViewController.swift */,
 				82A6E9BF1D09456B004B5CDE /* MainViewController.swift */,
 				82A6E9C11D094583004B5CDE /* LeftViewController.swift */,
@@ -114,6 +123,7 @@
 			children = (
 				82CFD48C1D0BAE5100AC5657 /* UIViewController.swift */,
 				82CFD48A1D0BABF400AC5657 /* UIApplication.swift */,
+				82975AAA1D0C934E005E6EFE /* transFerFunc.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -150,6 +160,7 @@
 				TargetAttributes = {
 					82A6E9A71D0940A0004B5CDE = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = ZY929FY943;
 					};
 				};
 			};
@@ -192,12 +203,14 @@
 			files = (
 				82A6E9AE1D0940A0004B5CDE /* ViewController.swift in Sources */,
 				82A6E9BE1D0941B2004B5CDE /* SlideMenuController.swift in Sources */,
+				82975AA91D0C7430005E6EFE /* MyAnnotation.swift in Sources */,
 				82A6EAC21D0A7389004B5CDE /* HeaderFooterViewController.swift in Sources */,
 				82CFD48D1D0BAE5100AC5657 /* UIViewController.swift in Sources */,
 				82A6E9AC1D0940A0004B5CDE /* AppDelegate.swift in Sources */,
 				82A6E9C21D094583004B5CDE /* LeftViewController.swift in Sources */,
 				82A6E9C01D09456B004B5CDE /* MainViewController.swift in Sources */,
 				82D380281D0AC3FF00509C5D /* DetailViewController.swift in Sources */,
+				82975AAB1D0C934E005E6EFE /* transFerFunc.swift in Sources */,
 				82CFD4851D0B969F00AC5657 /* MapViewController.swift in Sources */,
 				82CFD48B1D0BABF400AC5657 /* UIApplication.swift in Sources */,
 				82CFD4871D0B9CD900AC5657 /* ExSlideMenuController.swift in Sources */,
@@ -313,10 +326,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SliderViewController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.coolApp.SliderViewController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -324,10 +340,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SliderViewController/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.coolApp.SliderViewController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

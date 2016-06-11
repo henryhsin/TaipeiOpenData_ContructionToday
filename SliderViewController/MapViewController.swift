@@ -15,31 +15,71 @@ var mapItem: mapModel?
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     @IBOutlet weak var map: MKMapView!
+    
+    var locationManager: CLLocationManager!
     var latitude: CLLocationDegrees?
     var longitude: CLLocationDegrees?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let x = Double((item?.X)!)
-        let y = Double((item?.Y)!)
-        
-        Cal_TWD97_To_lonlat(x!, yy: y!)
-        
-        print(self.latitude)
-        print(self.longitude)
-        print("GG")
-        
-        let location: CLLocationCoordinate2D? = CLLocationCoordinate2DMake(latitude!, longitude!)
-        
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        map.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        self.addAnnotationForMapView(map)
     }
 
-    
-    
-    
+    // my location
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last! as CLLocation
+        manager.stopUpdatingLocation()
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        map.setRegion(region, animated: true)
         
+        myAnnotation = MKPointAnnotation()
+        let myLocation: CLLocationCoordinate2D? = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        myAnnotation.coordinate = myLocation!
+        myAnnotation.title = "My Location!!"
+        myAnnotation.subtitle = "媽！我在這裡！！"
+        map.addAnnotation(myAnnotation)
         
-        
+    }
     
+    func addAnnotationForMapView(mapView: MKMapView){
+        for itemDetail in itemDetailArr{
+            let x = Double((itemDetail.X)!)
+            let y = Double((itemDetail.Y)!)
+            Cal_TWD97_To_lonlat(x!, yy: y!)
+            
+            let location: CLLocationCoordinate2D? = CLLocationCoordinate2DMake(latitude!, longitude!)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = location!
+            annotation.title = "施工單位:\(itemDetail.App_Name!)"
+            annotation.subtitle = "地址:\(itemDetail.addr!)"
+            
+            map.addAnnotation(annotation)
+        }
+
+    }
+    
+    
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation.title! == "My Location!!" {
+            let pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "myLocation")
+            pin.pinTintColor = UIColor.blueColor()
+            pin.canShowCallout = true
+            pin.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure)
+            return pin
+        }
+        return nil
+    }
+        
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if view.reuseIdentifier == "myLocation"{
+        }
+    }
     
     
     

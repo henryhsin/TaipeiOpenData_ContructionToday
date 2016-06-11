@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
+
 var item: itemModel?
 
-class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
+class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSURLSessionDelegate, NSURLSessionDownloadDelegate,
+    MKMapViewDelegate,
+    CLLocationManagerDelegate{
     
     var detailDict = [String: String]()
     @IBOutlet weak var tableView: UITableView!
@@ -100,6 +105,34 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
 
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 4{
+            let thisPhoneNum:String? = item?.Tc_Tl
+            let url = NSURL(string: "tel://\(thisPhoneNum!)")//便用此電話號碼做成一個url
+            print(url)
+            if url != nil{
+            UIApplication.sharedApplication().openURL(url!)
+            }
+        }else if indexPath.section == 2{
+           
+            let x = Double((item!.X)!)
+            let y = Double((item!.Y)!)
+            
+            let latLong = self.Cal_TWD97_To_lonlat(x!, yy: y!)
+            
+            let anno = MKPointAnnotation()
+            let myLocation: CLLocationCoordinate2D? = CLLocationCoordinate2DMake(latLong[0], latLong[1])
+            anno.coordinate = myLocation!
+            let myLoactionPlacemark = MKPlacemark(coordinate: anno.coordinate, addressDictionary: nil)
+            
+           
+            let destination = MKMapItem(placemark: myLoactionPlacemark)
+            destination.name = item?.addr
+            destination.openInMapsWithLaunchOptions(Dictionary(dictionaryLiteral: (MKLaunchOptionsDirectionsModeDriving,MKLaunchOptionsDirectionsModeKey)))
+            
+        }
     }
     
     

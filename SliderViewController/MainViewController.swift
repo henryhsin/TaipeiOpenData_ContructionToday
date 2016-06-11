@@ -8,19 +8,38 @@
 
 import UIKit
 
+
 var dataArray = [AnyObject]()
+var itemDetailArr = [itemModel]()
+import MapKit
+import CoreLocation
 
-class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NSURLSessionDelegate, NSURLSessionDownloadDelegate, SlideMenuControllerDelegate {
+var myAnnotation = MKPointAnnotation()
 
+
+class MainViewController: UIViewController, UITableViewDataSource,
+    UITableViewDelegate,
+    NSURLSessionDelegate,
+    NSURLSessionDownloadDelegate,
+    SlideMenuControllerDelegate,
+    MKMapViewDelegate,
+    CLLocationManagerDelegate{
+
+    
+    var itemDetailDict = [String: String]()
+    var itemDetail: itemModel?
+    
+    var locationManager: CLLocationManager!
+    
     @IBAction func leftButton(sender: UIBarButtonItem) {
     self.slideMenuController()?.openLeft()
+    
     }
     
     var detailViewController: DetailViewController? = nil
     
 
     @IBOutlet weak var tableView: UITableView!
-    
     
     
     
@@ -35,9 +54,34 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let dataTask = session.downloadTaskWithURL(url!)
         dataTask.resume()
         
-        setNavigationBarItem()
-
+        
+        self.setNavigationBarItem()
+        
+        
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
+        
+        
+        
+       
     }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last! as CLLocation
+        manager.stopUpdatingLocation()
+        myAnnotation = MKPointAnnotation()
+        let myLocation: CLLocationCoordinate2D? = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        myAnnotation.coordinate = myLocation!
+        myAnnotation.title = "My Location!!"
+        myAnnotation.subtitle = "媽！我在這裡！！"
+        print(myAnnotation.coordinate)
+        print("QQ")
+        
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -66,6 +110,22 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.layoutMargins = UIEdgeInsetsZero
         cell.preservesSuperviewLayoutMargins = false
         
+        for data in dataArray{
+        itemDetailDict = data as! [String : String]
+        
+        itemDetail = itemModel(
+            App_Name: itemDetailDict["App_Name"]!,
+            C_Name: itemDetailDict["C_Name"]!,
+            addr: itemDetailDict["addr"]!,
+            Tc_Ma: itemDetailDict["Tc_Ma"]!,
+            Tc_Tl: itemDetailDict["Tc_Tl"]!,
+            X: itemDetailDict["X"]!,
+            Y: itemDetailDict["Y"]!
+            )
+            
+        itemDetailArr.append(itemDetail!)
+        }
+        
         return cell
     }
     
@@ -75,8 +135,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-
-        self.performSegueWithIdentifier("mainToDetail", sender: nil)
+    self.performSegueWithIdentifier("mainToDetail", sender: nil)
     }
     
     
@@ -87,7 +146,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             try dataArray = NSJSONSerialization.JSONObjectWithData(NSData(contentsOfURL: location)!, options: NSJSONReadingOptions.MutableContainers) as! [AnyObject]
             //NSJSONReadingOptions.MutableContainers指名會有很多資料
             self.tableView.reloadData()//再讓tableView重新reload data
-        }catch {//有錯誤走這邊
+            
+            }catch {//有錯誤走這邊
             print("error!!")
         }
     }
@@ -109,12 +169,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 
                 controller.detailDict = dataArray[indexPath.row] as! [String : String]
                 
-                
             }
         }
     }
 
     
 }
+
 
 
