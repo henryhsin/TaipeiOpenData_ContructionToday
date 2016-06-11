@@ -34,7 +34,10 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             C_Name: detailDict["C_Name"]!,
             addr: detailDict["addr"]!,
             Tc_Ma: detailDict["Tc_Ma"]!,
-            Tc_Tl: detailDict["Tc_Tl"]!)
+            Tc_Tl: detailDict["Tc_Tl"]!,
+            X: detailDict["X"]!,
+            Y: detailDict["Y"]!
+        )
         
         
     }
@@ -134,14 +137,18 @@ public struct itemModel {
     public var addr: String?
     public var Tc_Ma: String?
     public var Tc_Tl: String?
+    public var X: String?
+    public var Y: String?
     
-    public init(App_Name: String, C_Name: String, addr: String, Tc_Ma: String, Tc_Tl: String) {
+    public init(App_Name: String, C_Name: String, addr: String, Tc_Ma: String, Tc_Tl: String, X: String, Y: String) {
         
         self.App_Name = App_Name
         self.C_Name = C_Name
         self.addr = addr
         self.Tc_Ma = Tc_Ma
         self.Tc_Tl = Tc_Tl
+        self.X = X
+        self.Y = Y
     }
 }
 

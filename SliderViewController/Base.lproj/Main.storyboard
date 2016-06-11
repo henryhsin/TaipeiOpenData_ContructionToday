@@ -37,8 +37,22 @@
                     <view key="view" contentMode="scaleToFill" id="MHf-SA-TD5">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ovh-Us-3HC">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ovh-Us-3HC" firstAttribute="leading" secondItem="MHf-SA-TD5" secondAttribute="leading" id="5Xp-a5-1Gq"/>
+                            <constraint firstItem="Syd-lu-1yi" firstAttribute="top" secondItem="Ovh-Us-3HC" secondAttribute="bottom" id="UuZ-IX-yzF"/>
+                            <constraint firstItem="Ovh-Us-3HC" firstAttribute="top" secondItem="MHf-SA-TD5" secondAttribute="top" id="qVm-kb-M8E"/>
+                            <constraint firstAttribute="trailing" secondItem="Ovh-Us-3HC" secondAttribute="trailing" id="zFJ-Y1-8ZP"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="map" destination="Ovh-Us-3HC" id="XtH-E6-l68"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bw1-5p-lAr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
