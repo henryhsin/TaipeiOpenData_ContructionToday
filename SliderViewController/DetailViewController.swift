@@ -28,18 +28,12 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(itemDetailArr.count)
-        print(itemDetailArr)
-        
-        print("QQ")
         
         tableView.dataSource = self
         tableView.delegate = self
         self.initItemModle()
         
         
-        print(dataArray.count)
-        print("QQ")
     }
     
         

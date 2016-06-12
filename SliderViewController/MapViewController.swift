@@ -97,28 +97,61 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation.title! == "My Location!!" {
-            let pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "myLocation")
+        let identifier_myLocation = "MyPin"
+        if annotation.isKindOfClass(MKUserLocation) {
+            print("QQ")
+            var pin = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier_myLocation)
+            if pin == nil{
+                pin = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier_myLocation)
+            }else {
+                pin!.annotation = annotation
+            }
             
+            pin!.canShowCallout = true
+            pin!.image = UIImage(named: "Ninja-48" )
             
-            
+            pin!.rightCalloutAccessoryView = UIButton(type: UIButtonType.InfoLight)
             //pin.pinTintColor = UIColor.blueColor()
-            pin.canShowCallout = true
-            pin.image = UIImage(named: "ic_notifications_black_24dp"  )
-
-            pin.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure)
             
             return pin
+            
+        }else if annotation.title! == "My Location!!" {
+            var pin = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier_myLocation)
+            if pin == nil{
+                pin = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier_myLocation)
+            }else {
+                pin!.annotation = annotation
+            }
+            
+            pin!.canShowCallout = true
+            pin!.image = UIImage(named: "Ninja-48" )
+
+            pin!.rightCalloutAccessoryView = UIButton(type: UIButtonType.InfoLight)
+            //pin.pinTintColor = UIColor.blueColor()
+
+            return pin
+            
+            
+            
+            
         }else{
-            let pin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "another")
-            pin.canShowCallout = true
-            pin.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure)
+            var pin = mapView.dequeueReusableAnnotationViewWithIdentifier("Others")
+            if pin == nil{
+                pin = MKAnnotationView(annotation: annotation, reuseIdentifier: "Others")
+            }else {
+                pin!.annotation = annotation
+            }
+
+            pin!.canShowCallout = true
+             pin!.image = UIImage(named: "Edvard Munch-48" )
+            pin!.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure)
             return pin
         }
     }
+    
         
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if view.reuseIdentifier == "another"{
+        if view.reuseIdentifier == "Others"{
             let destLocation: CLLocationCoordinate2D? = CLLocationCoordinate2DMake(view.annotation!.coordinate.latitude, view.annotation!.coordinate.longitude)
             
             
