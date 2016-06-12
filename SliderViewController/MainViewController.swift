@@ -62,24 +62,13 @@ class MainViewController: UIViewController, UITableViewDataSource,
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
+        locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
         locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+       locationManager.startUpdatingLocation()
         
         
     }
-    
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations.last! as CLLocation
-        manager.stopUpdatingLocation()
-        myAnnotation = MKPointAnnotation()
-        let myLocation: CLLocationCoordinate2D? = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
-        myAnnotation.coordinate = myLocation!
-        myAnnotation.title = "My Location!!"
-        myAnnotation.subtitle = "媽！我在這裡！！"
-        
-    }
-
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

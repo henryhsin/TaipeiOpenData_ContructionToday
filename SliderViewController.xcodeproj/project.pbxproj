@@ -13,6 +13,8 @@
 		82975BA71D0D1C28005E6EFE /* ViewModle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82975BA61D0D1C28005E6EFE /* ViewModle.swift */; };
 		82975BAB1D0D22E2005E6EFE /* RegionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82975BA91D0D22E2005E6EFE /* RegionProtocol.swift */; };
 		82975BAC1D0D22E2005E6EFE /* RegionDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82975BAA1D0D22E2005E6EFE /* RegionDelegateProtocol.swift */; };
+		82975BAF1D0D63FA005E6EFE /* Taiwan.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 82975BAE1D0D63FA005E6EFE /* Taiwan.gpx */; };
+		82975BB21D0D83C6005E6EFE /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82975BB11D0D83C6005E6EFE /* CoreLocation.framework */; };
 		82A6E9AC1D0940A0004B5CDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6E9AB1D0940A0004B5CDE /* AppDelegate.swift */; };
 		82A6E9AE1D0940A0004B5CDE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6E9AD1D0940A0004B5CDE /* ViewController.swift */; };
 		82A6E9B11D0940A0004B5CDE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82A6E9AF1D0940A0004B5CDE /* Main.storyboard */; };
@@ -37,6 +39,8 @@
 		82975BA61D0D1C28005E6EFE /* ViewModle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModle.swift; sourceTree = "<group>"; };
 		82975BA91D0D22E2005E6EFE /* RegionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegionProtocol.swift; sourceTree = "<group>"; };
 		82975BAA1D0D22E2005E6EFE /* RegionDelegateProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegionDelegateProtocol.swift; sourceTree = "<group>"; };
+		82975BAE1D0D63FA005E6EFE /* Taiwan.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Taiwan.gpx; sourceTree = "<group>"; };
+		82975BB11D0D83C6005E6EFE /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		82A6E9A81D0940A0004B5CDE /* SliderViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SliderViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A6E9AB1D0940A0004B5CDE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82A6E9AD1D0940A0004B5CDE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82975BB21D0D83C6005E6EFE /* CoreLocation.framework in Frameworks */,
 				82975AA71D0C5EFB005E6EFE /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,9 +90,18 @@
 			name = RegionProtocol;
 			sourceTree = "<group>";
 		};
+		82975BB01D0D6400005E6EFE /* GPS Test */ = {
+			isa = PBXGroup;
+			children = (
+				82975BAE1D0D63FA005E6EFE /* Taiwan.gpx */,
+			);
+			name = "GPS Test";
+			sourceTree = "<group>";
+		};
 		82A6E99F1D0940A0004B5CDE = {
 			isa = PBXGroup;
 			children = (
+				82975BB11D0D83C6005E6EFE /* CoreLocation.framework */,
 				82975AA61D0C5EFB005E6EFE /* MapKit.framework */,
 				82A6E9AA1D0940A0004B5CDE /* SliderViewController */,
 				82A6E9A91D0940A0004B5CDE /* Products */,
@@ -116,6 +130,7 @@
 				82A6E9BF1D09456B004B5CDE /* MainViewController.swift */,
 				82A6E9C11D094583004B5CDE /* LeftViewController.swift */,
 				82A6E9B71D0940A0004B5CDE /* Info.plist */,
+				82975BB01D0D6400005E6EFE /* GPS Test */,
 			);
 			path = SliderViewController;
 			sourceTree = "<group>";
@@ -186,6 +201,11 @@
 					82A6E9A71D0940A0004B5CDE = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = ZY929FY943;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -213,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				82A6EAC01D0A5DB9004B5CDE /* HeaderFooterView.xib in Resources */,
+				82975BAF1D0D63FA005E6EFE /* Taiwan.gpx in Resources */,
 				82A6E9B61D0940A0004B5CDE /* LaunchScreen.storyboard in Resources */,
 				82A6E9B31D0940A0004B5CDE /* Assets.xcassets in Resources */,
 				82A6E9B11D0940A0004B5CDE /* Main.storyboard in Resources */,

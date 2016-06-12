@@ -32,35 +32,34 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         map.delegate = self
-        map.showsUserLocation = false
+        map.showsUserLocation = true
         map.userTrackingMode = .Follow
         
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+//        locationManager.requestWhenInUseAuthorization()
+//        locationManager.startUpdatingLocation()
        self.addAnnotationForMapView(map)
         
-        
-        
+        self.setupData()
         
         
     }
 
-    // my location
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        let location = locations.last! as CLLocation
-        manager.stopUpdatingLocation()
-        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        map.setRegion(region, animated: true)
-        
-        myAnnotation = MKPointAnnotation()
-        let myLocation: CLLocationCoordinate2D? = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
-        myAnnotation.coordinate = myLocation!
-        myAnnotation.title = "My Location!!"
-        myAnnotation.subtitle = "媽！我在這裡！！"
-        map.addAnnotation(myAnnotation)
-        
+   
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if CLLocationManager.authorizationStatus() == .NotDetermined {
+            locationManager.requestAlwaysAuthorization()
+        }else if CLLocationManager.authorizationStatus() == .Denied {
+            showAlert("Location services were previously denied.")
+        }else if CLLocationManager.authorizationStatus() == .AuthorizedAlways {
+            showAlert("Goog Job!")
+            locationManager.startUpdatingLocation()
+        }
     }
+    
+
+    
+    
     
     func addAnnotationForMapView(mapView: MKMapView){
         var i = 0
@@ -89,8 +88,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
            
         }
-//        print(itemDetailArr.count)
-//        print("QQ")
 
     }
     
@@ -185,24 +182,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
 
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // 1. 還沒有詢問過用戶以獲得權限
-        if CLLocationManager.authorizationStatus() == .NotDetermined {
-            locationManager.requestAlwaysAuthorization()
-        }
-            // 2. 用戶不同意
-        else if CLLocationManager.authorizationStatus() == .Denied {
-            showAlert("Location services were previously denied.")
-        }
-            // 3. 用戶已經同意
-        else if CLLocationManager.authorizationStatus() == .AuthorizedAlways {
-            showAlert("Goog Job!")
-            locationManager.startUpdatingLocation()
-        }
-    }
-    
     func showAlert(title: String) {
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action) in
@@ -225,8 +204,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             // 2.準備 region 會用到的相關屬性
             let title = "Lorrenzillo's"
-            let coordinate = CLLocationCoordinate2DMake(37.703026, -121.759735)
-            let regionRadius = 300.0
+            let coordinate = CLLocationCoordinate2DMake(23.019999, 120.234228)
+            let regionRadius = 400.0
             
             // 3. 設置 region 的相關屬性
             let region = CLCircularRegion(center: CLLocationCoordinate2D(latitude: coordinate.latitude,
@@ -252,11 +231,77 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         let circleRenderer = MKCircleRenderer(overlay: overlay)
         circleRenderer.strokeColor = UIColor.redColor()
+        
         circleRenderer.lineWidth = 1.0
         return circleRenderer
     }
     
     
+    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        showAlert("enter \(region.identifier)")
+        monitoredRegions[region.identifier] = NSDate()
+
+    }
+    
+    // 2. 當用戶退出一個 region
+    func locationManager(manager: CLLocationManager, didExitRegion region: CLRegion) {
+        showAlert("exit \(region.identifier)")
+        monitoredRegions.removeValueForKey(region.identifier)
+
+    }
+    
+    
+    
+    // 3. 更新 region
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        updateRegions()
+    }
+    
+    func updateRegions() {
+        
+        // 1.
+        let regionMaxVisiting = 10.0
+        var regionsToDelete: [String] = []
+        
+        // 2.
+        for regionIdentifier in monitoredRegions.keys {
+            
+            // 3.
+            if NSDate().timeIntervalSinceDate(monitoredRegions[regionIdentifier]!) > regionMaxVisiting {
+                showAlert("Thanks for visiting our restaurant")
+                
+                regionsToDelete.append(regionIdentifier)
+            }
+        }
+        
+        // 4.
+        for regionIdentifier in regionsToDelete {
+            monitoredRegions.removeValueForKey(regionIdentifier)
+        }
+    }
+    
+    
+    
+    // MARK: - Comples business logic
+    
+    func updateRegionsWithLocation(location: CLLocation) {
+        
+        let regionMaxVisiting = 1.0
+        var regionsToDelete: [String] = []
+        
+        for regionIdentifier in monitoredRegions.keys {
+            if NSDate().timeIntervalSinceDate(monitoredRegions[regionIdentifier]!) > regionMaxVisiting {
+                showAlert("Thanks for visiting our restaurant")
+                
+                regionsToDelete.append(regionIdentifier)
+            }
+        }
+        
+        for regionIdentifier in regionsToDelete {
+            monitoredRegions.removeValueForKey(regionIdentifier)
+        }
+    }
+
     
     
     
