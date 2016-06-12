@@ -28,23 +28,18 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(itemDetailArr.count)
+        print(itemDetailArr)
+        
+        print("QQ")
+        
         tableView.dataSource = self
         tableView.delegate = self
+        self.initItemModle()
         
         
-      
-        
-        item = itemModel(
-            App_Name: detailDict["App_Name"]!,
-            C_Name: detailDict["C_Name"]!,
-            addr: detailDict["addr"]!,
-            Tc_Ma: detailDict["Tc_Ma"]!,
-            Tc_Tl: detailDict["Tc_Tl"]!,
-            X: detailDict["X"]!,
-            Y: detailDict["Y"]!
-        )
-        
-        
+        print(dataArray.count)
+        print("QQ")
     }
     
         
@@ -52,7 +47,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - Table view data source
@@ -82,7 +76,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }else{
             return nil
         }
-        print(item!.App_Name)
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -107,11 +100,11 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 4{
             let thisPhoneNum:String? = item?.Tc_Tl
-            let url = NSURL(string: "tel://\(thisPhoneNum!)")//便用此電話號碼做成一個url
-            print(url)
+            let url = NSURL(string: "tel://\(thisPhoneNum!)")
             if url != nil{
             UIApplication.sharedApplication().openURL(url!)
             }
@@ -145,44 +138,30 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
         do{
             try dataArray = NSJSONSerialization.JSONObjectWithData(NSData(contentsOfURL: location)!, options: NSJSONReadingOptions.MutableContainers) as! [AnyObject]
-            //NSJSONReadingOptions.MutableContainers指名會有很多資料
-            self.tableView.reloadData()//再讓tableView重新reload data
-            
-            
-        }catch {//有錯誤走這邊
+                self.tableView.reloadData()
+        }catch {
             print("error!!")
         }
     }
 
+    func initItemModle(){
+        item = itemModel(
+            App_Name: detailDict["App_Name"]!,
+            C_Name: detailDict["C_Name"]!,
+            addr: detailDict["addr"]!,
+            Tc_Ma: detailDict["Tc_Ma"]!,
+            Tc_Tl: detailDict["Tc_Tl"]!,
+            X: detailDict["X"]!,
+            Y: detailDict["Y"]!
+        )
+
+    }
     
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
     
     
-}
-
-
-public struct itemModel {
-    
-    public var App_Name: String?
-    public var C_Name: String?
-    public var addr: String?
-    public var Tc_Ma: String?
-    public var Tc_Tl: String?
-    public var X: String?
-    public var Y: String?
-    
-    public init(App_Name: String, C_Name: String, addr: String, Tc_Ma: String, Tc_Tl: String, X: String, Y: String) {
-        
-        self.App_Name = App_Name
-        self.C_Name = C_Name
-        self.addr = addr
-        self.Tc_Ma = Tc_Ma
-        self.Tc_Tl = Tc_Tl
-        self.X = X
-        self.Y = Y
-    }
 }
 
 

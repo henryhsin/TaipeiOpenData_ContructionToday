@@ -47,6 +47,8 @@ class MainViewController: UIViewController, UITableViewDataSource,
         super.viewDidLoad()
         let url = NSURL(string: "http://data.taipei.gov.tw/opendata/apply/query/QkZCODAxNUUtQkI3My00MjU2LUIyOUEtNTNDQjk5REI0MUUw?$format=json")
         
+        
+        
         let sessionWtihConigure = NSURLSessionConfiguration.defaultSessionConfiguration()
         
         let session = NSURLSession(configuration: sessionWtihConigure, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
@@ -64,9 +66,6 @@ class MainViewController: UIViewController, UITableViewDataSource,
         locationManager.startUpdatingLocation()
         
         
-        
-        
-       
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -77,8 +76,6 @@ class MainViewController: UIViewController, UITableViewDataSource,
         myAnnotation.coordinate = myLocation!
         myAnnotation.title = "My Location!!"
         myAnnotation.subtitle = "媽！我在這裡！！"
-        print(myAnnotation.coordinate)
-        print("QQ")
         
     }
 
@@ -110,21 +107,7 @@ class MainViewController: UIViewController, UITableViewDataSource,
         cell.layoutMargins = UIEdgeInsetsZero
         cell.preservesSuperviewLayoutMargins = false
         
-        for data in dataArray{
-        itemDetailDict = data as! [String : String]
         
-        itemDetail = itemModel(
-            App_Name: itemDetailDict["App_Name"]!,
-            C_Name: itemDetailDict["C_Name"]!,
-            addr: itemDetailDict["addr"]!,
-            Tc_Ma: itemDetailDict["Tc_Ma"]!,
-            Tc_Tl: itemDetailDict["Tc_Tl"]!,
-            X: itemDetailDict["X"]!,
-            Y: itemDetailDict["Y"]!
-            )
-            
-        itemDetailArr.append(itemDetail!)
-        }
         
         return cell
     }
@@ -144,12 +127,20 @@ class MainViewController: UIViewController, UITableViewDataSource,
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
         do{
             try dataArray = NSJSONSerialization.JSONObjectWithData(NSData(contentsOfURL: location)!, options: NSJSONReadingOptions.MutableContainers) as! [AnyObject]
-            //NSJSONReadingOptions.MutableContainers指名會有很多資料
-            self.tableView.reloadData()//再讓tableView重新reload data
             
-            }catch {//有錯誤走這邊
+            self.tableView.reloadData()
+        }catch {
             print("error!!")
         }
+        
+        
+        for data in dataArray{
+            itemDetailDict = data as! [String : String]
+            initItemDetailModle()
+        }
+        
+        
+
     }
     
     
@@ -159,9 +150,9 @@ class MainViewController: UIViewController, UITableViewDataSource,
     }
     
     
-    // MARK: - Segues
+    // MARK: - Segues pass the value
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {//當json資料呈現在tableView時，常會藉由prepareForSegue傳送到下個頁面(detailViewController)
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "mainToDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 
@@ -171,6 +162,21 @@ class MainViewController: UIViewController, UITableViewDataSource,
                 
             }
         }
+    }
+
+    
+    
+    func initItemDetailModle(){
+        itemDetail = itemModel(
+            App_Name: itemDetailDict["App_Name"]!,
+            C_Name: itemDetailDict["C_Name"]!,
+            addr: itemDetailDict["addr"]!,
+            Tc_Ma: itemDetailDict["Tc_Ma"]!,
+            Tc_Tl: itemDetailDict["Tc_Tl"]!,
+            X: itemDetailDict["X"]!,
+            Y: itemDetailDict["Y"]!
+        )
+        itemDetailArr.append(itemDetail!)
     }
 
     

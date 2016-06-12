@@ -10,6 +10,9 @@
 		82975AA71D0C5EFB005E6EFE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82975AA61D0C5EFB005E6EFE /* MapKit.framework */; };
 		82975AA91D0C7430005E6EFE /* MyAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82975AA81D0C7430005E6EFE /* MyAnnotation.swift */; };
 		82975AAB1D0C934E005E6EFE /* transFerFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82975AAA1D0C934E005E6EFE /* transFerFunc.swift */; };
+		82975BA71D0D1C28005E6EFE /* ViewModle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82975BA61D0D1C28005E6EFE /* ViewModle.swift */; };
+		82975BAB1D0D22E2005E6EFE /* RegionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82975BA91D0D22E2005E6EFE /* RegionProtocol.swift */; };
+		82975BAC1D0D22E2005E6EFE /* RegionDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82975BAA1D0D22E2005E6EFE /* RegionDelegateProtocol.swift */; };
 		82A6E9AC1D0940A0004B5CDE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6E9AB1D0940A0004B5CDE /* AppDelegate.swift */; };
 		82A6E9AE1D0940A0004B5CDE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A6E9AD1D0940A0004B5CDE /* ViewController.swift */; };
 		82A6E9B11D0940A0004B5CDE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82A6E9AF1D0940A0004B5CDE /* Main.storyboard */; };
@@ -31,6 +34,9 @@
 		82975AA61D0C5EFB005E6EFE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		82975AA81D0C7430005E6EFE /* MyAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAnnotation.swift; sourceTree = "<group>"; };
 		82975AAA1D0C934E005E6EFE /* transFerFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = transFerFunc.swift; sourceTree = "<group>"; };
+		82975BA61D0D1C28005E6EFE /* ViewModle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModle.swift; sourceTree = "<group>"; };
+		82975BA91D0D22E2005E6EFE /* RegionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegionProtocol.swift; sourceTree = "<group>"; };
+		82975BAA1D0D22E2005E6EFE /* RegionDelegateProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegionDelegateProtocol.swift; sourceTree = "<group>"; };
 		82A6E9A81D0940A0004B5CDE /* SliderViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SliderViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A6E9AB1D0940A0004B5CDE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82A6E9AD1D0940A0004B5CDE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +68,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		82975BA81D0D1E3D005E6EFE /* Modle */ = {
+			isa = PBXGroup;
+			children = (
+				82975BA61D0D1C28005E6EFE /* ViewModle.swift */,
+			);
+			name = Modle;
+			sourceTree = "<group>";
+		};
+		82975BAD1D0D22E7005E6EFE /* RegionProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				82975BA91D0D22E2005E6EFE /* RegionProtocol.swift */,
+				82975BAA1D0D22E2005E6EFE /* RegionDelegateProtocol.swift */,
+			);
+			name = RegionProtocol;
+			sourceTree = "<group>";
+		};
 		82A6E99F1D0940A0004B5CDE = {
 			isa = PBXGroup;
 			children = (
@@ -85,12 +108,13 @@
 				82A6EABD1D0A51A8004B5CDE /* Supports */,
 				82CFD48E1D0BB60900AC5657 /* Extension */,
 				82A6EABE1D0A51D4004B5CDE /* View */,
+				82975BA81D0D1E3D005E6EFE /* Modle */,
+				82975BAD1D0D22E7005E6EFE /* RegionProtocol */,
 				82CFD4841D0B969F00AC5657 /* MapViewController.swift */,
 				82975AA81D0C7430005E6EFE /* MyAnnotation.swift */,
 				82D380271D0AC3FF00509C5D /* DetailViewController.swift */,
 				82A6E9BF1D09456B004B5CDE /* MainViewController.swift */,
 				82A6E9C11D094583004B5CDE /* LeftViewController.swift */,
-				82CFD4861D0B9CD900AC5657 /* ExSlideMenuController.swift */,
 				82A6E9B71D0940A0004B5CDE /* Info.plist */,
 			);
 			path = SliderViewController;
@@ -102,6 +126,7 @@
 				82A6E9AB1D0940A0004B5CDE /* AppDelegate.swift */,
 				82A6E9BD1D0941B2004B5CDE /* SlideMenuController.swift */,
 				82A6E9AD1D0940A0004B5CDE /* ViewController.swift */,
+				82CFD4861D0B9CD900AC5657 /* ExSlideMenuController.swift */,
 				82A6E9B21D0940A0004B5CDE /* Assets.xcassets */,
 			);
 			name = Supports;
@@ -209,11 +234,14 @@
 				82A6E9AC1D0940A0004B5CDE /* AppDelegate.swift in Sources */,
 				82A6E9C21D094583004B5CDE /* LeftViewController.swift in Sources */,
 				82A6E9C01D09456B004B5CDE /* MainViewController.swift in Sources */,
+				82975BAC1D0D22E2005E6EFE /* RegionDelegateProtocol.swift in Sources */,
 				82D380281D0AC3FF00509C5D /* DetailViewController.swift in Sources */,
 				82975AAB1D0C934E005E6EFE /* transFerFunc.swift in Sources */,
 				82CFD4851D0B969F00AC5657 /* MapViewController.swift in Sources */,
 				82CFD48B1D0BABF400AC5657 /* UIApplication.swift in Sources */,
+				82975BA71D0D1C28005E6EFE /* ViewModle.swift in Sources */,
 				82CFD4871D0B9CD900AC5657 /* ExSlideMenuController.swift in Sources */,
+				82975BAB1D0D22E2005E6EFE /* RegionProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
